@@ -400,14 +400,25 @@ footer span{color:var(--gold)}
 
 @media(max-width:860px){
   .raffle-hero{grid-template-columns:1fr}
-  .raffle-hero-imgwrap{padding:1.2rem 1.2rem .5rem}
-  .raffle-hero-img{max-height:560px}
-  .raffle-content{padding:1.8rem 1.4rem 2.4rem;text-align:center;align-items:center}
+  .raffle-hero-imgwrap{padding:1rem;background:#1a0512}
+  /* En mobile: imagen completa sin límite de altura — el póster es vertical y debe verse íntegro */
+  .raffle-hero-img{
+    width:100%;
+    height:auto;
+    max-height:none;
+    object-fit:contain;
+    display:block;
+  }
+  .raffle-content{padding:1.6rem 1.2rem 2rem;text-align:center;align-items:center}
   .raffle-badge,.raffle-price-tag{align-self:center}
   .raffle-btns{justify-content:center}
 }
-@media(max-width:640px){
-  .raffle-hero-img{max-height:80vh}
+@media(max-width:480px){
+  .raffle-hero-imgwrap{padding:.6rem .6rem .3rem}
+  .raffle-hero-img{border-radius:8px}
+  .raffle-content{padding:1.2rem 1rem 1.8rem}
+  .raffle-content h1{font-size:1.75rem}
+  .raffle-price-tag{padding:.7rem 1.6rem}
 }
 
 /* Sección de números de la rifa */
