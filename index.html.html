@@ -576,6 +576,10 @@ footer span{color:var(--gold)}
 .chkp-field input{padding:.68rem .9rem;border:1px solid var(--cream-2);border-radius:var(--rs);font-family:var(--fb);font-size:.88rem;color:var(--dark);background:var(--white);outline:none;transition:var(--tr)}
 .chkp-field input:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(201,169,110,.15)}
 .chkp-field input::placeholder{color:var(--gray-light)}
+/* Mercado Pago */
+.mp-btn{display:flex;align-items:center;justify-content:center;gap:.55rem;width:100%;padding:.85rem;background:#009EE3;color:#fff;border-radius:50px;font-weight:700;font-size:.9rem;letter-spacing:.02em;transition:var(--tr);box-shadow:0 6px 18px rgba(0,158,227,.35)}
+.mp-btn:hover{background:#00b1eb;transform:translateY(-1px);box-shadow:0 8px 22px rgba(0,158,227,.45)}
+.mp-btn .ic{color:#fff}
 /* Transferencia */
 .alias-box{background:var(--dark-2);border-radius:var(--rs);padding:1rem 1.2rem;display:flex;align-items:center;justify-content:space-between;gap:.8rem;margin:.3rem 0 .8rem}
 .alias-val{font-family:var(--fd);font-size:1.3rem;color:var(--gold);letter-spacing:.06em;font-weight:600}
@@ -868,10 +872,21 @@ footer span{color:var(--gold)}
       <div class="chkp-summary" id="chkpSummary"></div>
     </div>
 
+    <!-- PAGO CON MERCADO PAGO -->
+    <div class="chkp-section">
+      <h3><svg class="ic" viewBox="0 0 24 24"><rect x="2.5" y="5" width="19" height="14" rx="2"/><path d="M2.5 10h19"/></svg>Pagá con Mercado Pago</h3>
+      <p class="alias-note">La forma más rápida: pagá con tarjeta, dinero en cuenta o efectivo desde el link de Mercado Pago. Ingresá el monto total de tu pedido.</p>
+      <a class="mp-btn" href="https://link.mercadopago.com.ar/deliaarbel" target="_blank" rel="noopener">
+        <svg class="ic" viewBox="0 0 24 24"><path d="M12 21s7-6.5 7-11.5A7 7 0 0 0 5 9.5C5 14.5 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.3"/></svg>
+        Pagar con Mercado Pago
+      </a>
+      <p class="alias-note" style="margin-top:.5rem">Después de pagar, adjuntá el comprobante aquí abajo para confirmar tu pedido — igual que con la transferencia.</p>
+    </div>
+
     <!-- PAGO POR TRANSFERENCIA -->
     <div class="chkp-section">
-      <h3><svg class="ic" viewBox="0 0 24 24"><path d="M3 21h18"/><path d="M4 21V10l8-6 8 6v11"/><path d="M9 21v-8h6v8"/></svg>Pago por transferencia</h3>
-      <p class="alias-note">Realizá tu transferencia al siguiente alias:</p>
+      <h3><svg class="ic" viewBox="0 0 24 24"><path d="M3 21h18"/><path d="M4 21V10l8-6 8 6v11"/><path d="M9 21v-8h6v8"/></svg>O por transferencia</h3>
+      <p class="alias-note">Si preferís, realizá tu transferencia al siguiente alias:</p>
       <div class="alias-box">
         <span class="alias-val" id="aliasVal">delia.538.soga.mp</span>
         <button class="alias-copy" onclick="copyAlias()">
