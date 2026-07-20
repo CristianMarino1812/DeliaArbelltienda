@@ -4,6 +4,21 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
 <title>Arbell con Delia — Belleza & Cuidado Personal · Santa Fe</title>
+<meta name="description" content="Perfumes, cremas, cosméticos, cuidado capilar y vitaminas. Consultora Arbell en Santa Fe, Argentina. Pedidos por WhatsApp."/>
+
+<!-- Vista previa al compartir el link (WhatsApp, Facebook, etc.) -->
+<meta property="og:type" content="website"/>
+<meta property="og:url" content="https://delia-arbelltienda.vercel.app/"/>
+<meta property="og:title" content="Arbell con Delia — Belleza & Cuidado Personal"/>
+<meta property="og:description" content="Perfumes, cremas, cosméticos, cuidado capilar y vitaminas. Consultora Arbell en Santa Fe, Argentina. Pedidos por WhatsApp."/>
+<meta property="og:image" content="https://delia-arbelltienda.vercel.app/img/og-share.jpg"/>
+<meta property="og:image:width" content="1200"/>
+<meta property="og:image:height" content="630"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="Arbell con Delia — Belleza & Cuidado Personal"/>
+<meta name="twitter:description" content="Perfumes, cremas, cosméticos, cuidado capilar y vitaminas. Santa Fe, Argentina."/>
+<meta name="twitter:image" content="https://delia-arbelltienda.vercel.app/img/og-share.jpg"/>
+
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
@@ -325,11 +340,6 @@ footer span{color:var(--gold)}
 .mp-btn:hover{background:#00b1eb;transform:translateY(-1px);box-shadow:0 8px 22px rgba(0,158,227,.45)}
 .mp-btn .ic{color:#fff}
 /* Transferencia */
-.alias-box{background:var(--dark-2);border-radius:var(--rs);padding:1rem 1.2rem;display:flex;align-items:center;justify-content:space-between;gap:.8rem;margin:.3rem 0 .8rem}
-.alias-val{font-family:var(--fd);font-size:1.3rem;color:var(--gold);letter-spacing:.06em;font-weight:600}
-.alias-copy{padding:.45rem .9rem;background:var(--gold);color:var(--dark);border-radius:50px;font-size:.78rem;font-weight:700;letter-spacing:.06em;transition:var(--tr);white-space:nowrap;flex-shrink:0}
-.alias-copy:hover{background:var(--gold-light)}
-.alias-confirm{font-size:.78rem;color:#5bc47b;font-weight:600;min-height:1.1rem;transition:opacity .3s;margin-top:.1rem}
 .alias-note{font-size:.8rem;color:var(--gray);line-height:1.5}
 /* Comprobante */
 .comp-drop{border:2px dashed var(--cream-2);border-radius:var(--r);padding:1.4rem;text-align:center;cursor:pointer;transition:var(--tr);position:relative}
@@ -493,7 +503,6 @@ footer span{color:var(--gold)}
       <div class="cit"><svg class="ic" viewBox="0 0 24 24"><path d="M4 20l1.3-3.9A8 8 0 1 1 8.4 19z"/><path class="ic-fill" d="M8.5 9.3c.2-.5.5-.5.8-.5h.5c.2 0 .4 0 .6.4l.7 1.6c.1.3 0 .5-.1.6l-.5.6c-.1.2-.2.3 0 .6.3.5 1 1.3 1.7 1.7.3.2.5.2.7 0l.5-.5c.2-.2.4-.2.6-.1l1.5.7c.3.1.4.3.4.6v.5c0 .3-.4.9-.8 1-1 .3-2 .1-3.6-.7-2-1-3.2-2.8-3.3-3-.1-.2-.9-1.3-.9-2.4 0-.6.2-1 .4-1.2z"/></svg><a href="https://wa.me/543425085949" target="_blank">Escribir por WhatsApp</a></div>
       <div class="cit"><svg class="ic" viewBox="0 0 24 24"><path d="M12 21s7-6.5 7-11.5A7 7 0 0 0 5 9.5C5 14.5 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.3"/></svg><span>Santa Fe, Argentina</span></div>
       <div class="cit"><svg class="ic" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg><span>Lun–Vie 9:00 – 18:00 hs</span></div>
-      <div class="cit"><svg class="ic" viewBox="0 0 24 24" style="color:var(--gold)"><path d="M3 21h18"/><path d="M4 21V10l8-6 8 6v11"/><path d="M9 21v-8h6v8"/></svg><span>Alias: <strong style="color:var(--gold);letter-spacing:.03em">delia.538.soga.mp</strong></span></div>
     </div>
     <div class="soc">
       <a href="#" class="sl"><svg class="ic" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle class="ic-fill" cx="17.3" cy="6.7" r="1.1"/></svg></a>
@@ -572,24 +581,7 @@ footer span{color:var(--gold)}
         <svg class="ic" viewBox="0 0 24 24"><path d="M12 21s7-6.5 7-11.5A7 7 0 0 0 5 9.5C5 14.5 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.3"/></svg>
         Pagar con Mercado Pago
       </a>
-      <p class="alias-note" style="margin-top:.5rem">Después de pagar, adjuntá el comprobante aquí abajo para confirmar tu pedido — igual que con la transferencia.</p>
-    </div>
-
-    <!-- PAGO POR TRANSFERENCIA -->
-    <div class="chkp-section">
-      <h3><svg class="ic" viewBox="0 0 24 24"><path d="M3 21h18"/><path d="M4 21V10l8-6 8 6v11"/><path d="M9 21v-8h6v8"/></svg>O por transferencia</h3>
-      <p class="alias-note">Si preferís, realizá tu transferencia al siguiente alias:</p>
-      <div class="alias-box">
-        <span class="alias-val" id="aliasVal">delia.538.soga.mp</span>
-        <button class="alias-copy" onclick="copyAlias()">
-          <svg class="ic" viewBox="0 0 24 24"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg> Copiar
-        </button>
-      </div>
-      <div class="alias-confirm" id="aliasCfm"></div>
-      <p class="alias-note" style="margin-top:.5rem">
-        <svg class="ic" viewBox="0 0 24 24" style="color:var(--gold)"><circle cx="12" cy="12" r="9"/><path d="M12 11v5"/><circle class="ic-fill" cx="12" cy="8.2" r="1"/></svg>
-        Luego de transferir, adjuntá el comprobante aquí abajo para confirmar tu pedido.
-      </p>
+      <p class="alias-note" style="margin-top:.5rem">Después de pagar, adjuntá el comprobante aquí abajo para confirmar tu pedido.</p>
     </div>
 
     <!-- COMPROBANTE -->
@@ -1650,21 +1642,17 @@ document.querySelectorAll('.fin').forEach(el=>obsAnim.observe(el));
 renderSections('all','');
 
 /* ═══════════════════════════════════════════════════════
-   CHECKOUT — Transferencia + Comprobante
-   ► Alias: delia.538.soga.mp
+   CHECKOUT — Mercado Pago + Comprobante
    ► Email: Deliaarbell2026@gmail.com
    ► Al primer envío, FormSubmit enviará un mail de activación:
      confirmá el link y todos los pedidos llegarán a tu casilla.
 ═══════════════════════════════════════════════════════ */
-const TRANSFER_ALIAS  = 'delia.538.soga.mp';          // ← TU ALIAS AQUÍ
 const CHECKOUT_EMAIL  = 'Deliaarbell2026@gmail.com';  // ← TU E-MAIL AQUÍ
 
 let _compFile = null;
 
 /* Abrir panel checkout desde "Finalizar compra" */
 function openCheckout(){
-  // Rellenar alias
-  document.getElementById('aliasVal').textContent = TRANSFER_ALIAS;
   // Rellenar resumen de productos
   const sumEl = document.getElementById('chkpSummary');
   const ids = Object.keys(cart).filter(id => cart[id] > 0);
@@ -1678,7 +1666,6 @@ function openCheckout(){
   // Limpiar estado
   compClear();
   document.getElementById('chkpResult').style.display = 'none';
-  document.getElementById('aliasCfm').textContent = '';
   document.getElementById('ck_nombre').value='';
   document.getElementById('ck_tel').value='';
   document.getElementById('ck_dir').value='';
@@ -1687,24 +1674,6 @@ function openCheckout(){
 }
 function closeCheckout(){
   document.getElementById('chkpPanel').classList.remove('open');
-}
-
-/* Copiar alias */
-function copyAlias(){
-  const alias = document.getElementById('aliasVal').textContent;
-  const cfm   = document.getElementById('aliasCfm');
-  navigator.clipboard?.writeText(alias).then(()=>{
-    cfm.textContent = '✅ Alias copiado correctamente.';
-    setTimeout(()=>cfm.textContent='', 3000);
-  }).catch(()=>{
-    // Fallback para navegadores sin clipboard API
-    const ta = document.createElement('textarea');
-    ta.value = alias; ta.style.cssText='position:fixed;top:-9999px';
-    document.body.appendChild(ta); ta.select();
-    document.execCommand('copy'); document.body.removeChild(ta);
-    cfm.textContent = '✅ Alias copiado correctamente.';
-    setTimeout(()=>cfm.textContent='', 3000);
-  });
 }
 
 /* Comprobante: selección */
@@ -1786,7 +1755,6 @@ async function sendOrder(){
   fd.append('direccion', dir || 'No indicada');
   fd.append('pedido',   detalle);
   fd.append('total',    ars(total));
-  fd.append('alias_transferencia', TRANSFER_ALIAS);
   fd.append('comprobante', _compFile, _compFile.name);
   fd.append('_subject', `Nuevo pedido Arbell de ${nombre}`);
   fd.append('_captcha', 'false');
