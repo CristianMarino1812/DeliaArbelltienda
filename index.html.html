@@ -1734,7 +1734,7 @@ async function sendOrder(){
   // Validaciones
   if(!nombre){ _chkpFeedback(resEl,'⚠ Por favor ingresá tu nombre.','warn'); return; }
   if(!tel)   { _chkpFeedback(resEl,'⚠ Por favor ingresá tu teléfono.','warn'); return; }
-  if(!_compFile){ _chkpFeedback(resEl,'⚠ Por favor adjuntá el comprobante de transferencia.','warn'); return; }
+  if(!_compFile){ _chkpFeedback(resEl,'⚠ Por favor adjuntá el comprobante de tu pago.','warn'); return; }
 
   // Armar detalle del pedido
   const ids = Object.keys(cart).filter(id=>cart[id]>0);
