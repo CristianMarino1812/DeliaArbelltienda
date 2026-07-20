@@ -1684,16 +1684,18 @@ function compSelected(input){
 }
 function compValidate(file){
   const errEl = document.getElementById('compErr');
-  errEl.textContent = '';
   const allowed = ['image/jpeg','image/png','image/webp'];
   if(!allowed.includes(file.type)){
+    compClear();
     errEl.textContent = '⚠ Solo se aceptan archivos JPG, JPEG, PNG o WEBP.';
-    compClear(); return;
+    return;
   }
   if(file.size > 5*1024*1024){
+    compClear();
     errEl.textContent = '⚠ El archivo supera el tamaño máximo de 5 MB.';
-    compClear(); return;
+    return;
   }
+  errEl.textContent = '';
   _compFile = file;
   const reader = new FileReader();
   reader.onload = e => {
