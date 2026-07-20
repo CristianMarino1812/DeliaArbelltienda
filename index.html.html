@@ -85,7 +85,10 @@ header{position:sticky;top:0;z-index:100;background:rgba(250,247,242,.97);backdr
 .hero{
   position:relative;width:100%;min-height:500px;
   display:flex;align-items:stretch;overflow:hidden;
-  background:linear-gradient(135deg,#1A1512 0%,#2E2820 45%,#3D2F1E 100%);
+  background-color:#1A1512;
+  background-image:url('img/hero-bg.jpg');
+  background-size:cover;
+  background-position:center right;
 }
 /* Contenedor del fondo decorativo */
 .hero-media{
@@ -203,6 +206,53 @@ main{max-width:1280px;margin:0 auto;padding:3rem 1.5rem 4rem}
 .pprice .old{font-size:.82rem;color:var(--gray-light);text-decoration:line-through;font-weight:300;display:block;line-height:1}
 .abtn{padding:.52rem 1rem;background:var(--dark);color:var(--white);border-radius:50px;font-size:.78rem;font-weight:500;letter-spacing:.04em;transition:var(--tr);display:flex;align-items:center;gap:.3rem;white-space:nowrap}
 .abtn:hover,.abtn.added{background:var(--gold);color:var(--dark)}
+.pc{cursor:pointer}
+
+/* VISTA RÁPIDA DE PRODUCTO */
+.pv-ov{position:fixed;inset:0;background:rgba(10,8,6,.7);z-index:210;opacity:0;pointer-events:none;transition:opacity .3s}
+.pv-ov.open{opacity:1;pointer-events:all}
+.pv-modal{position:fixed;top:50%;left:50%;transform:translate(-50%,-46%);width:min(880px,94vw);max-height:88vh;overflow-y:auto;
+  background:var(--white);border-radius:var(--r);z-index:211;box-shadow:var(--shl);
+  opacity:0;pointer-events:none;transition:opacity .3s,transform .3s;
+}
+.pv-modal.open{opacity:1;pointer-events:all;transform:translate(-50%,-50%)}
+.pv-close{position:absolute;top:.9rem;right:.9rem;width:38px;height:38px;border-radius:50%;background:var(--cream);border:1px solid var(--cream-2);display:flex;align-items:center;justify-content:center;color:var(--dark);cursor:pointer;transition:var(--tr);z-index:2}
+.pv-close:hover{background:var(--gold-light)}
+.pv-body{display:grid;grid-template-columns:1fr 1fr}
+.pv-media{position:relative;background:var(--cream-2);display:flex;align-items:center;justify-content:center;min-height:320px;aspect-ratio:1/1}
+.pv-media svg{width:100%;height:100%;position:absolute;top:0;left:0}
+.pv-img{width:88%;height:88%;position:relative;background-size:contain;background-position:center;background-repeat:no-repeat;cursor:zoom-in}
+.pv-zoom-btn{position:absolute;bottom:.9rem;right:.9rem;width:38px;height:38px;border-radius:50%;background:rgba(255,255,255,.92);border:none;display:flex;align-items:center;justify-content:center;color:var(--dark);cursor:pointer;transition:var(--tr);box-shadow:var(--sh)}
+.pv-zoom-btn:hover{background:var(--gold-light)}
+.pv-info{padding:2.2rem 2.2rem 2.4rem;display:flex;flex-direction:column}
+.pv-cat{font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);font-weight:600;margin-bottom:.5rem}
+.pv-name{font-family:var(--fd);font-size:1.7rem;font-weight:500;color:var(--dark);line-height:1.2;margin-bottom:.4rem}
+.pv-code{font-size:.78rem;color:var(--gray-light);margin-bottom:1.1rem;letter-spacing:.03em}
+.pv-price{font-family:var(--fd);font-size:2rem;font-weight:600;color:var(--dark);display:flex;align-items:baseline;gap:.6rem;margin-bottom:1.2rem}
+.pv-price .old{font-size:1.05rem;color:var(--gray-light);text-decoration:line-through;font-weight:300}
+.pv-badge{display:inline-block;background:var(--rose-dark);color:#fff;font-size:.7rem;font-weight:700;padding:.25rem .65rem;border-radius:4px;letter-spacing:.06em;margin-bottom:1rem;width:fit-content}
+.pv-badge.nb{background:var(--gold-dark)}
+.pv-desc{font-size:.9rem;color:var(--gray);line-height:1.7;margin-bottom:1.6rem}
+.pv-actions{display:flex;gap:.8rem;margin-top:auto}
+.pv-actions .abtn{flex:1;justify-content:center;padding:.9rem 1rem;font-size:.85rem;border-radius:50px}
+.pv-wish{width:48px;height:48px;border-radius:50%;background:var(--cream);border:1px solid var(--cream-2);display:flex;align-items:center;justify-content:center;color:var(--gray);cursor:pointer;transition:var(--tr);flex-shrink:0}
+.pv-wish:hover{color:var(--rose-dark)}
+@media(max-width:720px){
+  .pv-modal{top:auto;bottom:0;left:0;transform:translateY(100%);width:100%;max-height:92vh;border-radius:var(--r) var(--r) 0 0}
+  .pv-modal.open{transform:translateY(0)}
+  .pv-body{grid-template-columns:1fr}
+  .pv-media{aspect-ratio:4/3;min-height:0}
+  .pv-info{padding:1.4rem 1.4rem 1.8rem}
+  .pv-name{font-size:1.4rem}
+  .pv-price{font-size:1.6rem}
+}
+
+/* Lightbox de zoom de imagen */
+.pv-zoom-ov{position:fixed;inset:0;background:rgba(6,4,3,.92);z-index:220;opacity:0;pointer-events:none;transition:opacity .25s;display:flex;align-items:center;justify-content:center;padding:2rem}
+.pv-zoom-ov.open{opacity:1;pointer-events:all}
+.pv-zoom-img{width:min(720px,92vw);height:min(720px,80vh);background-size:contain;background-position:center;background-repeat:no-repeat}
+.pv-zoom-close{position:absolute;top:1.2rem;right:1.2rem;width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.3);display:flex;align-items:center;justify-content:center;color:#fff;cursor:pointer;transition:var(--tr)}
+.pv-zoom-close:hover{background:rgba(255,255,255,.22)}
 
 /* DIVIDER */
 .divider{height:1px;background:linear-gradient(90deg,transparent,var(--gold-light),transparent);margin:2.5rem 0}
@@ -315,6 +365,7 @@ footer span{color:var(--gold)}
   .pg{grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:.85rem}
   .pb{padding:.7rem .85rem .9rem}.og{grid-template-columns:1fr}
   .abtn span{display:none} main{padding:2rem 1rem 3rem}
+  .pv-actions .abtn span{display:inline}
 }
 
 /* ═══════ CHECKOUT PANEL ═══════ */
@@ -406,7 +457,7 @@ footer span{color:var(--gold)}
 
 <header>
   <div class="hi">
-    <div class="lw">
+    <div class="lw" onclick="scrollToTop()" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();scrollToTop();}" role="button" tabindex="0" aria-label="Volver al inicio" style="cursor:pointer">
       <div class="logo">AR<span>BELL</span></div>
       <div class="logo-sub">con Delia</div>
     </div>
@@ -638,6 +689,44 @@ footer span{color:var(--gold)}
     <button class="chk" onclick="checkout()"><svg class="ic" viewBox="0 0 24 24"><circle cx="9" cy="20" r="1.4"/><circle cx="18" cy="20" r="1.4"/><path d="M2.5 3h2l2.4 12.1a2 2 0 0 0 2 1.6h7.6a2 2 0 0 0 2-1.6L21 8H8"/><path d="M15 5.8l1.4 1.4L20 3.6"/></svg> Finalizar compra</button>
   </div>
 </aside>
+
+<!-- ═══════════════════════════════════════════════════════
+     VISTA RÁPIDA DE PRODUCTO — se abre al tocar una tarjeta
+═══════════════════════════════════════════════════════ -->
+<div class="pv-ov" id="pvOv" onclick="closeProductView()"></div>
+<div class="pv-modal" id="pvModal" data-id="">
+  <button class="pv-close" onclick="closeProductView()"><svg class="ic" viewBox="0 0 24 24"><path d="M5 5l14 14M19 5L5 19"/></svg></button>
+  <div class="pv-body">
+    <div class="pv-media">
+      <div class="pv-img" id="pvImg" onclick="openImgZoom()"></div>
+      <button class="pv-zoom-btn" onclick="openImgZoom()" aria-label="Ampliar imagen">
+        <svg class="ic" viewBox="0 0 24 24"><path d="M4 8V5a1 1 0 0 1 1-1h3"/><path d="M4 16v3a1 1 0 0 0 1 1h3"/><path d="M16 4h3a1 1 0 0 1 1 1v3"/><path d="M16 20h3a1 1 0 0 0 1-1v-3"/></svg>
+      </button>
+    </div>
+    <div class="pv-info">
+      <div class="pv-cat" id="pvCat"></div>
+      <h2 class="pv-name" id="pvName"></h2>
+      <div class="pv-code" id="pvCode"></div>
+      <span class="pv-badge" id="pvBadge" style="display:none"></span>
+      <div class="pv-price" id="pvPrice"></div>
+      <p class="pv-desc" id="pvDesc"></p>
+      <div class="pv-actions">
+        <button class="abtn" id="pvAddBtn" onclick="addToCart(pvCurrentId)">
+          <svg class="ic" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg> <span>Agregar</span>
+        </button>
+        <button class="pv-wish" onclick="toggleWish(this)" aria-label="Favorito">
+          <svg class="ic" viewBox="0 0 24 24"><path d="M12 20.5s-7.5-4.7-9.8-9.3C.6 7.8 2.4 4 6.2 4 8.6 4 10.6 5.4 12 7.3 13.4 5.4 15.4 4 17.8 4c3.8 0 5.6 3.8 4 7.2C19.5 15.8 12 20.5 12 20.5z"/></svg>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="pv-zoom-ov" id="pvZoomOv" onclick="closeImgZoom()">
+  <button class="pv-zoom-close" onclick="closeImgZoom()"><svg class="ic" viewBox="0 0 24 24"><path d="M5 5l14 14M19 5L5 19"/></svg></button>
+  <div class="pv-zoom-img" id="pvZoomImg"></div>
+</div>
+
 <div class="toast" id="toast"><svg class="ic" viewBox="0 0 24 24"><path d="M4 12l5 5L20 6"/></svg><span id="toastMsg">Producto agregado</span></div>
 
 <!-- ═══════════════════════════════════════════════════════
@@ -1403,6 +1492,7 @@ const ICONS = {
   'heart-filled': '<path class="ic-fill" d="M12 20.5s-7.5-4.7-9.8-9.3C.6 7.8 2.4 4 6.2 4 8.6 4 10.6 5.4 12 7.3 13.4 5.4 15.4 4 17.8 4c3.8 0 5.6 3.8 4 7.2C19.5 15.8 12 20.5 12 20.5z"/>',
   'plus': '<path d="M12 5v14M5 12h14"/>',
   'minus': '<path d="M5 12h14"/>',
+  'maximize': '<path d="M4 8V5a1 1 0 0 1 1-1h3"/><path d="M4 16v3a1 1 0 0 0 1 1h3"/><path d="M16 4h3a1 1 0 0 1 1 1v3"/><path d="M16 20h3a1 1 0 0 0 1-1v-3"/>',
 };
 function ico(name, extraCls){
   const body = ICONS[name] || '';
@@ -1505,12 +1595,12 @@ function cardHTML(p,svg){
   } else {
     visual=`<div class="lazy-visual" data-svg="1">${svg}</div>`;
   }
-  return `<article class="pc" data-id="${p.id}">
+  return `<article class="pc" data-id="${p.id}" onclick="openProductView(${p.id})">
     <div class="piw">
       ${visual}
       <div class="pover"><span>Arbell</span></div>
       ${p.badge?`<span class="pbadge ${bc}">${p.badge}</span>`:''}
-      <button class="pwish" onclick="toggleWish(this)">${ico('heart')}</button>
+      <button class="pwish" onclick="event.stopPropagation();toggleWish(this)">${ico('heart')}</button>
     </div>
     <div class="pb">
       <div class="pcat">${CATNAME[p.cat]}${p.cat==='perfumes'&&p.gender==='fem'?' · Mujer':p.cat==='perfumes'&&p.gender==='masc'?' · Hombre':p.cat==='perfumes'&&p.gender==='unisex'?' · Unisex':''}</div>
@@ -1521,7 +1611,7 @@ function cardHTML(p,svg){
           ${p.oldPrice?`<s class="old">${ars(p.oldPrice)}</s>`:''}
           ${ars(p.price)}
         </div>
-        <button class="abtn ${inCart?'added':''}" onclick="addToCart(${p.id})">
+        <button class="abtn ${inCart?'added':''}" onclick="event.stopPropagation();addToCart(${p.id})">
           ${ico(inCart?'check':'plus')}
           <span>${inCart?'Agregado':'Agregar'}</span>
         </button>
@@ -1529,6 +1619,76 @@ function cardHTML(p,svg){
     </div>
   </article>`;
 }
+
+/* ═══════ VISTA RÁPIDA DE PRODUCTO ═══════ */
+let pvCurrentId = null;
+function openProductView(id){
+  const p = PRODS.find(x => x.id === id);
+  if(!p) return;
+  pvCurrentId = id;
+  const modal = document.getElementById('pvModal');
+  modal.dataset.id = id;
+
+  // Imagen: misma lógica que las tarjetas (imagen propia, compartida por CSS, o SVG de respaldo)
+  const imgEl = document.getElementById('pvImg');
+  imgEl.className = 'pv-img';
+  imgEl.style.backgroundImage = '';
+  imgEl.innerHTML = '';
+  if(p.imgCls){
+    imgEl.classList.add('preal-img', p.imgCls);
+  } else if(p.img){
+    imgEl.style.backgroundImage = `url("${p.img}")`;
+  } else {
+    imgEl.innerHTML = getSVG(p.cat, 0);
+  }
+
+  const genderTxt = p.cat==='perfumes'&&p.gender==='fem'?' · Mujer':p.cat==='perfumes'&&p.gender==='masc'?' · Hombre':p.cat==='perfumes'&&p.gender==='unisex'?' · Unisex':'';
+  document.getElementById('pvCat').textContent = CATNAME[p.cat] + genderTxt;
+  document.getElementById('pvName').textContent = p.name;
+  document.getElementById('pvCode').textContent = `Código: #${p.id}`;
+  document.getElementById('pvDesc').textContent = p.desc;
+
+  document.getElementById('pvPrice').innerHTML =
+    (p.oldPrice ? `<span class="old">${ars(p.oldPrice)}</span>` : '') + ars(p.price);
+
+  const badgeEl = document.getElementById('pvBadge');
+  if(p.badge){
+    const bc = ['NUEVO','PREMIUM','2×1','⭐ MESSI','PACK','OFERTA','2X1','2X'].includes(p.badge) ? 'nb' : '';
+    badgeEl.textContent = p.badge;
+    badgeEl.className = 'pv-badge ' + bc;
+    badgeEl.style.display = 'inline-block';
+  } else {
+    badgeEl.style.display = 'none';
+  }
+
+  const inCart = !!cart[p.id];
+  const addBtn = document.getElementById('pvAddBtn');
+  addBtn.classList.toggle('added', inCart);
+  addBtn.innerHTML = `${ico(inCart?'check':'plus')} <span>${inCart?'Agregado':'Agregar'}</span>`;
+
+  document.getElementById('pvOv').classList.add('open');
+  modal.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeProductView(){
+  document.getElementById('pvOv').classList.remove('open');
+  document.getElementById('pvModal').classList.remove('open');
+  document.body.style.overflow = '';
+}
+function openImgZoom(){
+  const src = document.getElementById('pvImg');
+  const zoomImg = document.getElementById('pvZoomImg');
+  zoomImg.style.backgroundImage = src.style.backgroundImage || getComputedStyle(src).backgroundImage;
+  document.getElementById('pvZoomOv').classList.add('open');
+}
+function closeImgZoom(){
+  document.getElementById('pvZoomOv').classList.remove('open');
+}
+document.addEventListener('keydown', e => {
+  if(e.key !== 'Escape') return;
+  if(document.getElementById('pvZoomOv').classList.contains('open')) closeImgZoom();
+  else if(document.getElementById('pvModal').classList.contains('open')) closeProductView();
+});
 
 /* ═══════ CONTACTO ═══════ */
 
@@ -1621,6 +1781,7 @@ document.getElementById('searchInput').addEventListener('input',function(){
   clearTimeout(st);st=setTimeout(()=>{curSearch=this.value.trim();renderSections(curCat,curSearch);if(curSearch)scrollToProds();},250);
 });
 function scrollToProds(){document.getElementById('productsSections').scrollIntoView({behavior:'smooth',block:'start'});}
+function scrollToTop(){window.scrollTo({top:0,behavior:'smooth'});}
 
 /* ═══════ TOAST ═══════ */
 let tt;
