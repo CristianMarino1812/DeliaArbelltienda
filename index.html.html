@@ -301,8 +301,12 @@ main{max-width:1280px;margin:0 auto;padding:3rem 1.5rem 4rem}
 .qb{width:26px;height:26px;border-radius:50%;border:1.5px solid var(--cream-2);font-size:13px;display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--dark);transition:var(--tr);background:var(--white);flex-shrink:0}
 .qb:hover{border-color:var(--gold);background:var(--cream)}
 .qv{font-size:.88rem;font-weight:700;min-width:20px;text-align:center;color:var(--dark)}
+.enc-item-price{font-family:var(--fd);font-size:.88rem;font-weight:700;color:var(--dark);margin-left:.3rem}
 .del-btn{width:30px;height:30px;border-radius:50%;background:rgba(156,63,85,.12);border:2px solid rgba(156,63,85,.45);display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--rose-dark);transition:var(--tr);flex-shrink:0;margin-left:auto}
 .del-btn:hover{background:var(--rose-dark);color:#fff;border-color:var(--rose-dark);transform:scale(1.1)}
+.enc-total{display:flex;align-items:center;justify-content:space-between;padding:.9rem 1rem;border-radius:var(--r);background:var(--dark-2);color:var(--white)}
+.enc-total span:first-child{font-size:.8rem;letter-spacing:.06em;text-transform:uppercase;color:var(--gold-light)}
+.enc-total span:last-child{font-family:var(--fd);font-size:1.35rem;font-weight:600}
 .del-btn svg{width:14px;height:14px}
 .enc-form{display:flex;flex-direction:column;gap:1rem}
 .enc-field{display:flex;flex-direction:column;gap:.3rem}
@@ -588,6 +592,10 @@ footer span{color:var(--gold)}
   <div class="enc-body">
 
     <div class="enc-list" id="encListEl"></div>
+    <div class="enc-total" id="encTotalEl" style="display:none">
+      <span>Total estimado</span>
+      <span id="encTotalVal">$0</span>
+    </div>
 
     <div class="enc-form" id="encForm">
       <div class="enc-field">
@@ -1646,6 +1654,7 @@ function updateEncBadge(){
 }
 function renderEncList(){
   const listEl = document.getElementById('encListEl');
+  const totalEl = document.getElementById('encTotalEl');
   const formEl = document.getElementById('encForm');
   const sendBtn = document.getElementById('encSendBtn');
   const ids = Object.keys(encList).filter(id => encList[id] > 0);
@@ -1654,14 +1663,17 @@ function renderEncList(){
       <svg class="ic" viewBox="0 0 24 24"><path d="M9 6h11M9 12h11M9 18h11"/><path d="M4 6l1 1 2-2M4 12l1 1 2-2M4 18l1 1 2-2"/></svg>
       <p>Todavía no agregaste productos.<br>Elegí "Encargar" en los que te interesen.</p>
     </div>`;
+    totalEl.style.display = 'none';
     formEl.style.display = 'none';
     sendBtn.style.display = 'none';
     return;
   }
   formEl.style.display = 'flex';
   sendBtn.style.display = 'flex';
+  let total = 0;
   listEl.innerHTML = ids.map(id => {
     const p = PRODS.find(x => x.id == id), q = encList[id];
+    total += p.price * q;
     const genderTxt = p.cat==='perfumes'&&p.gender==='fem'?' · Mujer':p.cat==='perfumes'&&p.gender==='masc'?' · Hombre':p.cat==='perfumes'&&p.gender==='unisex'?' · Unisex':'';
     const visual = p.img
       ? `<img src="${p.img}" alt="${p.name}"/>`
@@ -1676,11 +1688,14 @@ function renderEncList(){
           <button class="qb" onclick="changeEncQty(${id},-1)"><svg class="ic" viewBox="0 0 24 24"><path d="M5 12h14"/></svg></button>
           <span class="qv">${q}</span>
           <button class="qb" onclick="changeEncQty(${id},1)"><svg class="ic" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></button>
+          <span class="enc-item-price">${ars(p.price*q)}</span>
           <button class="del-btn" onclick="removeFromEncargo(${id})" title="Quitar"><svg class="ic" viewBox="0 0 24 24"><path d="M5 5l14 14M19 5L5 19"/></svg></button>
         </div>
       </div>
     </div>`;
   }).join('');
+  document.getElementById('encTotalVal').textContent = ars(total);
+  totalEl.style.display = 'flex';
 }
 function openEncargoPanel(){
   renderEncList();
@@ -1756,11 +1771,13 @@ async function sendEncargo(){
   btn.innerHTML = '<svg class="ic" style="animation:spin .8s linear infinite" viewBox="0 0 24 24"><path d="M12 3a9 9 0 1 0 9 9"/></svg> Enviando…';
   resEl.style.display = 'none';
 
+  let total = 0;
   const detalle = ids.map(id => {
     const p = PRODS.find(x => x.id == id), q = encList[id];
+    total += p.price * q;
     const genderTxt = p.cat==='perfumes'&&p.gender==='fem'?' · Mujer':p.cat==='perfumes'&&p.gender==='masc'?' · Hombre':p.cat==='perfumes'&&p.gender==='unisex'?' · Unisex':'';
     const cod = p.code || `#${p.id}`;
-    return `${p.name} (Cód. ${cod}, ${CATNAME[p.cat]}${genderTxt}) x${q}`;
+    return `${p.name} (Cód. ${cod}, ${CATNAME[p.cat]}${genderTxt}) x${q} = ${ars(p.price*q)}`;
   }).join(' | ');
 
   const fd = new FormData();
@@ -1769,6 +1786,7 @@ async function sendEncargo(){
   fd.append('email', email || 'No indicado');
   fd.append('pedido', detalle);
   fd.append('cantidad_productos', String(ids.length));
+  fd.append('total_estimado', ars(total));
   fd.append('observaciones', obs || 'Sin observaciones');
   fd.append('fecha', new Date().toLocaleString('es-AR', { dateStyle:'short', timeStyle:'short' }));
   fd.append('_subject', `Nuevo encargo de ${nombre} (${ids.length} producto${ids.length>1?'s':''})`);
