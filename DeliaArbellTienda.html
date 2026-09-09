@@ -433,6 +433,7 @@ footer span{color:var(--gold)}
 .photo-cosmet{background-image:url('img/cat-cosmet.jpg')}
 @media(min-width:900px){.og{grid-template-columns:repeat(4,1fr)}}
 </style>
+<script src="https://cdn.emailjs.com/dist/email.min.js"></script>
 </head>
 <body>
 
@@ -547,7 +548,7 @@ footer span{color:var(--gold)}
   </div>
   <div>
     <form class="cform"
-          action="https://formsubmit.co/Deliaarbell2026@gmail.com"
+          action="https://formsubmit.co/deliarbell2026@gmail.com"
           method="POST"
           enctype="multipart/form-data">
       <!-- Configuración FormSubmit -->
@@ -1627,7 +1628,10 @@ function toggleWish(btn){
    lo contacte y coordine pago y entrega. El pedido se envía por email vía
    FormSubmit — mismo servicio ya usado y probado en el sitio, sin backend
    propio ni claves expuestas en el cliente. ═══════ */
-const ENCARGO_EMAIL = 'Deliaarbell2026@gmail.com';  // ← TU E-MAIL AQUÍ
+const EMAILJS_SERVICE_ID  = 'service_19jldol';
+const EMAILJS_TEMPLATE_ID = 'template_pde2faf';
+const EMAILJS_PUBLIC_KEY  = 'L07T1dge8fvePIlBW';
+emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY });
 let encList = {}; // { productId: cantidad }
 
 function addToEncargo(id){
@@ -1752,9 +1756,7 @@ document.querySelectorAll('.fin').forEach(el=>obsAnim.observe(el));
 
 renderSections('all','');
 
-/* Enviar solicitud de encargo — se manda por email vía FormSubmit.
-   Al primer envío, FormSubmit manda un mail de activación: confirmá el
-   link y todos los encargos van a llegar a la casilla. */
+/* Enviar solicitud de encargo — se manda por email vía EmailJS. */
 async function sendEncargo(){
   const ids = Object.keys(encList).filter(id => encList[id] > 0);
   if(!ids.length) return;
@@ -1780,33 +1782,26 @@ async function sendEncargo(){
     return `${p.name} (Cód. ${cod}, ${CATNAME[p.cat]}${genderTxt}) x${q} = ${ars(p.price*q)}`;
   }).join(' | ');
 
-  const fd = new FormData();
-  fd.append('nombre', nombre);
-  fd.append('telefono', tel || 'No indicado');
-  fd.append('email', email || 'No indicado');
-  fd.append('pedido', detalle);
-  fd.append('cantidad_productos', String(ids.length));
-  fd.append('total_estimado', ars(total));
-  fd.append('observaciones', obs || 'Sin observaciones');
-  fd.append('fecha', new Date().toLocaleString('es-AR', { dateStyle:'short', timeStyle:'short' }));
-  fd.append('_subject', `Nuevo encargo de ${nombre} (${ids.length} producto${ids.length>1?'s':''})`);
-  fd.append('_captcha', 'false');
-  fd.append('_template','table');
-  fd.append('_honey', '');
+  const params = {
+    nombre,
+    telefono: tel || 'No indicado',
+    email: email || 'No indicado',
+    pedido: detalle,
+    cantidad_productos: String(ids.length),
+    total_estimado: ars(total),
+    observaciones: obs || 'Sin observaciones',
+    fecha: new Date().toLocaleString('es-AR', { dateStyle:'short', timeStyle:'short' })
+  };
 
   try{
-    const res = await fetch(`https://formsubmit.co/${ENCARGO_EMAIL}`,{
-      method:'POST', body:fd, headers:{Accept:'application/json'}
-    });
-    if(res.ok){
-      _encFeedback(resEl,'✅ ¡Gracias! Recibimos tu solicitud de encargo. Nos comunicaremos contigo a la brevedad.','ok');
-      setTimeout(()=>{
-        encList = {};
-        updateEncBadge();
-        closeEncargo();
-        showToast('¡Solicitud enviada! Delia te contactará pronto.');
-      }, 2800);
-    } else { throw new Error(res.status); }
+    await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, params);
+    _encFeedback(resEl,'✅ ¡Gracias! Recibimos tu solicitud de encargo. Nos comunicaremos contigo a la brevedad.','ok');
+    setTimeout(()=>{
+      encList = {};
+      updateEncBadge();
+      closeEncargo();
+      showToast('¡Solicitud enviada! Delia te contactará pronto.');
+    }, 2800);
   } catch(err){
     console.error('Encargo error:',err);
     _encFeedback(resEl,'❌ No pudimos enviar tu solicitud. Inténtalo nuevamente en unos minutos.','err');
