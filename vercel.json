@@ -1,4 +1,10 @@
 {
+  "rewrites": [
+    {
+      "source": "/",
+      "destination": "/DeliaArbellTienda.html"
+    }
+  ],
   "headers": [
     {
       "source": "/(.*)",
